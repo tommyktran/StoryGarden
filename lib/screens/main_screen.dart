@@ -26,20 +26,24 @@ class _MainScreenState extends State<MainScreen> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
-          _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+          Provider.of<Stories>(context, listen: false).addStory(Story(title: 'Thing', description: 'Blah blaaaaa'));
           setState(() {
-            Provider.of<Stories>(context, listen: false).addStory(Story(title: 'Thing', description: 'Blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah '));
+
           });
+          _scrollController.jumpTo(0.0);
+
         },
       ),
       body: Consumer<Stories>(
         builder: (context, stories, child) {
           return Container(child: ListView.builder(
-              controller: _scrollController,
-              itemCount: stories.stories.length,
-              itemBuilder: (context, index) {
-                return StoryTile(story: stories.stories[index]);
-              }));
+                    reverse: true,
+                    controller: _scrollController,
+                    itemCount: stories.stories.length,
+                    itemBuilder: (context, index) {
+                      return StoryTile(story: stories.stories[index]);
+                    }),
+          );
         }
       ),
     );

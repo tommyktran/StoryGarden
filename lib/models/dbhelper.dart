@@ -1,6 +1,7 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:untitled/models/story.dart';
+import 'package:provider/provider.dart';
 
 const kTableStories = 'stories';
 

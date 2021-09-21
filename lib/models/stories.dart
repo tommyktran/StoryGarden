@@ -22,7 +22,7 @@ class Stories extends ChangeNotifier{
   }
 
   addStory(Story story) async {
-    stories.add(story);
+    stories.insert(0, story);
     await DbHelper.insertStory(story);
     notifyListeners();
   }
