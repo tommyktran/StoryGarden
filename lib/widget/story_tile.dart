@@ -4,7 +4,6 @@ import 'package:untitled/screens/write_screen.dart';
 import 'package:untitled/models/story.dart';
 
 class StoryTile extends StatelessWidget {
-
   Story story;
   StoryTile({required this.story});
 
@@ -12,12 +11,13 @@ class StoryTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => WriteScreen(story: story)));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => WriteScreen(story: story)));
       },
       child: Container(
         width: MediaQuery.of(context).size.width,
-        constraints: BoxConstraints(minHeight: 100.0),
-        padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+        constraints: BoxConstraints(minHeight: 120.0),
+        padding: EdgeInsets.fromLTRB(20, 15, 20, 10),
         decoration: BoxDecoration(
           border: Border(
             bottom: BorderSide(
@@ -26,11 +26,20 @@ class StoryTile extends StatelessWidget {
             ),
           ),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Stack(
           children: [
-            Text(story.title, style: bodyTextStyle),
-            Text(story.description, style: subtitleTextStyle),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(story.title, style: bodyTextStyle),
+                Text(story.description, style: subtitleTextStyle),
+                SizedBox(height:40.0),
+              ],
+            ),
+            Positioned(
+                bottom: 0.0,
+                child: Text('words: ${story.text.length.toString()}',
+                    style: subsubtitleTextStyle))
           ],
         ),
       ),

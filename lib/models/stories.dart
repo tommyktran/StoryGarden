@@ -1,21 +1,42 @@
+import 'package:flutter/cupertino.dart';
+
 import 'story.dart';
+import 'dbhelper.dart';
 
-
-class Stories {
+class Stories extends ChangeNotifier{
   List<Story> stories = [
-    Story(title: 'Story', description: 'A story about things.'),
-    Story(title: 'Story', description: 'A story about things.'),
-    Story(title: 'Story', description: 'A story about things.')
   ];
-  int? id;
 
-  Stories();
+  Stories() {
+    start();
+  }
 
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'stories': stories
-    };
+  start() async {
+    stories = await DbHelper.getAllStories();
+    notifyListeners();
+  }
+
+  getStories() async {
+    stories = await DbHelper.getAllStories();
+    return await DbHelper.getAllStories();
+  }
+
+  addStory(Story story) async {
+    stories.add(story);
+    await DbHelper.insertStory(story);
+    notifyListeners();
+  }
+
+  deleteStory(int id) async {
+    stories.removeWhere((element) => element.id == id);
+    await DbHelper.deleteStory(id);
+    notifyListeners();
+  }
+
+  editStory(Story story) async {
+    await DbHelper.updateStory(story);
+    getStories();
+    // should probably take this out / remove for editing text
   }
 
 }

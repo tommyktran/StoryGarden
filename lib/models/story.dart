@@ -5,7 +5,7 @@ class Story {
 
   String text;
 
-  Story({required this.title, this.description = '', this.text = ''});
+  Story({required this.title, this.description = '', this.text = '', this.id});
 
   Map<String, dynamic> toMap() {
     return {

@@ -7,3 +7,7 @@ TextStyle subtitleTextStyle = TextStyle(
     fontSize: 20.0,
   color: Colors.grey,
 );
+TextStyle subsubtitleTextStyle = TextStyle(
+  fontSize: 15.0,
+  color: Colors.grey,
+);

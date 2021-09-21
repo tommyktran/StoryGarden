@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'screens/main_screen.dart';
 import 'models/dbhelper.dart';
+import 'models/stories.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
-  new DBhelper().start();
+
+  runApp(ChangeNotifierProvider<Stories>(create: (context) => Stories(), child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {

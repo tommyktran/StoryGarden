@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:untitled/constants.dart';
 import 'package:untitled/models/story.dart';
+import 'package:provider/provider.dart';
+import 'package:untitled/models/stories.dart';
 
 class WriteScreen extends StatelessWidget {
   // const WriteScreen({Key? key}) : super(key: key);
@@ -16,6 +18,7 @@ class WriteScreen extends StatelessWidget {
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {
+              Provider.of<Stories>(context, listen: false).editStory(story);
               Navigator.pop(context);
             },
           ),
