@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:untitled/constants.dart';
 import 'package:untitled/screens/write_screen.dart';
 import 'package:untitled/models/story.dart';
+import 'package:provider/provider.dart';
 
 class StoryTile extends StatelessWidget {
   Story story;
@@ -38,7 +39,7 @@ class StoryTile extends StatelessWidget {
             ),
             Positioned(
                 bottom: 0.0,
-                child: Text('words: ${story.text.length.toString()}',
+                child: Text('words: ${story.getWords()}',
                     style: subsubtitleTextStyle))
           ],
         ),

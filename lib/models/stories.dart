@@ -35,8 +35,8 @@ class Stories extends ChangeNotifier{
 
   editStory(Story story) async {
     await DbHelper.updateStory(story);
-    getStories();
-    // should probably take this out / remove for editing text
+    await getStories();
+    notifyListeners();
   }
 
 }
