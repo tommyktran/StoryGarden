@@ -13,7 +13,6 @@ class Stories extends ChangeNotifier{
 
   start() async {
     stories = await DbHelper.getAllStories();
-    notifyListeners();
   }
 
   getStories() async {
@@ -22,7 +21,7 @@ class Stories extends ChangeNotifier{
   }
 
   addStory(Story story) async {
-    stories.insert(0, story);
+    stories.add(story);
     await DbHelper.insertStory(story);
     notifyListeners();
   }

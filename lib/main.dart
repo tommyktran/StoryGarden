@@ -5,7 +5,6 @@ import 'models/stories.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-
   runApp(ChangeNotifierProvider<Stories>(create: (context) => Stories(), child: MyApp()));
 }
 

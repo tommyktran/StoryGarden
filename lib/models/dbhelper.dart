@@ -9,14 +9,11 @@ class DbHelper {
   static Database? _db;
 
   static start() async {
-    if (await getLength() == 0) {
-      insertStory(Story(title: 'Story', description: 'A story about things.'));
-      insertStory(Story(title: 'Blah', description: 'A story about things.'));
-      insertStory(Story(title: 'qqqqq', description: 'A story about things.'));
-    }
+    _getDb();
   }
 
   static Future<Database> _getDb() async {
+    print("b");
     if (_db == null) {
       _db = await openDatabase(
         join(await getDatabasesPath(), 'stories.db'),
@@ -25,11 +22,13 @@ class DbHelper {
           await db.execute(
             'CREATE TABLE stories(id INTEGER PRIMARY KEY, title TEXT, description TEXT, text TEXT)'
           );
-          if (await getLength() == 0) {
-            insertStory(Story(title: 'Story', description: 'A story about things.'));
-            insertStory(Story(title: 'Blah', description: 'A story about things.'));
-            insertStory(Story(title: 'qqqqq', description: 'A story about things.'));
-          }
+
+          // Soooo trying to have a default breaks things
+          // if (await getLength() == 0) {
+          //   insertStory(Story(title: 'Story', description: 'A story about things.'));
+          //   insertStory(Story(title: 'Blah', description: 'A story about things.'));
+          //   insertStory(Story(title: 'qqqqq', description: 'A story about things.'));
+          // }
         },
       );
       print('database stories.db is opened');
@@ -56,6 +55,7 @@ class DbHelper {
   }
 
   static Future<List<Story>> getAllStories() async {
+    print("hi");
     Database db = await _getDb();
     final List<Map<String, dynamic>> maps = await db.query(kTableStories);
     print('Read ${maps.length} stories from the database');
@@ -74,4 +74,6 @@ class DbHelper {
     final List<Map<String, dynamic>> maps = await db.query(kTableStories);
     return maps.length;
   }
+
+
 }
